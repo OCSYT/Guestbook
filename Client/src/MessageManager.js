@@ -21,9 +21,11 @@ export default class MessageManager {
         const PrevCount = this.RenderedMessages.size;
         const Messages = await this.FetchMessages();
         const MessagesByID = new Map(Messages.map(M => [M.messageid, M]));
-
+        const ChatStart = document.getElementById('ChatStart');
         for (const [ID, Elem] of this.RenderedMessages.entries()) {
             if (!MessagesByID.has(ID)) {
+                console.log(ChatStart);
+                if (Elem == ChatStart) continue;
                 this.MessagesElement.removeChild(Elem);
                 this.RenderedMessages.delete(ID);
             }
